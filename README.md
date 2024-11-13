@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# weather_analytics
-=======
 # 실시간 날씨 모니터링 시스템
 
 ## 프로젝트 개요
@@ -24,4 +21,3 @@
 1. 필요 패키지 설치
    ```bash
    pip install -r requirements.txt
->>>>>>> 84c1316 (first commit)
