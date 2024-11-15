@@ -15,7 +15,7 @@ st.title("실시간 날씨 모니터링 대시보드")
 
 # DB에서 최신 데이터 조회
 def get_latest_weather():
-    conn = sqlite3.connect('weather_data.db')
+    conn = sqlite3.connect('data/weather_data.db')
     query = """
     SELECT city, temperature, humidity, weather_description, wind_speed, timestamp
     FROM weather_records
@@ -27,7 +27,7 @@ def get_latest_weather():
 
 # 최근 24시간 데이터 조회
 def get_historical_data():
-    conn = sqlite3.connect('weather_data.db')
+    conn = sqlite3.connect('data/weather_data.db')
     query = """
     SELECT city, temperature, humidity, timestamp
     FROM weather_records

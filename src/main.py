@@ -89,7 +89,7 @@ df_weather = process_weather_data(weather_data)
 import sqlite3
 
 def create_database():
-    conn = sqlite3.connect('weather_data.db')
+    conn = sqlite3.connect('data/weather_data.db')
     cursor = conn.cursor()
 
     query = '''
@@ -130,7 +130,7 @@ save_to_database(df_weather)
 
 # 저장된 데이터 확인
 def check_saved_data():
-    conn = sqlite3.connect('weather_data.db')
+    conn = sqlite3.connect('data/weather_data.db')
     cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM weather_records ORDER BY timestamp DESC LIMIT 5")
