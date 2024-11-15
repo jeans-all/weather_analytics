@@ -1,10 +1,16 @@
+import os 
+import pandas as pd
 import requests
 import json
-from datetime import datetime
 import time
 
+from datetime import datetime
+from dotenv import load_dotenv
 
-API_KEY = "364f04d5b65445901ca5805d4436638f"
+load_dotenv() # Load environment variables from .env
+
+API_KEY = os.environ.get('OPENWEATHER_API_KEY')
+#"364f04d5b65445901ca5805d4436638f"
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
 CITIES = [
@@ -58,7 +64,6 @@ weather_data = collect_all_cities()
 
 
 
-import pandas as pd
 
 def process_weather_data(weather_data):
     # JSON 데이터를 DataFrame으로 변환
