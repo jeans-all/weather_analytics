@@ -1,8 +1,6 @@
 import schedule
 import time
-from main import collect_all_cities
-from data_processing import process_weather_data
-from database import save_to_database
+from main import save_to_database, process_weather_data, collect_all_cities
 
 def job():
     weather_data = collect_all_cities()
