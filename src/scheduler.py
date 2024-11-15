@@ -8,7 +8,7 @@ def job():
     save_to_database(df_weather)
     print(f"Data collected at {time.strftime('%Y-%m-%d %H:%M:%S')}")
 
-# 15분마다 데이터 수집
+# Collect data every 15 minutes
 schedule.every(15).minutes.do(job)
 
 if __name__ == "__main__":

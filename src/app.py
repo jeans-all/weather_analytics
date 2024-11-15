@@ -4,16 +4,16 @@ import sqlite3
 import plotly.express as px
 from datetime import datetime, timedelta
 
-# 페이지 기본 설정
+# Basic Page Setting
 st.set_page_config(
     page_title="날씨 모니터링 대시보드",
     layout="wide"
 )
 
-# 제목
+# Title
 st.title("실시간 날씨 모니터링 대시보드")
 
-# DB에서 최신 데이터 조회
+# Retrive latest data from database
 def get_latest_weather():
     conn = sqlite3.connect('data/weather_data.db')
     query = """
@@ -25,7 +25,7 @@ def get_latest_weather():
     conn.close()
     return df
 
-# 최근 24시간 데이터 조회
+# Retrieve data of last 24 hours 
 def get_historical_data():
     conn = sqlite3.connect('data/weather_data.db')
     query = """
@@ -37,7 +37,6 @@ def get_historical_data():
     conn.close()
     return df
 
-# 최신 데이터 표시
 latest_data = get_latest_weather()
 
 # 도시별 현재 날씨 카드 표시
@@ -53,7 +52,7 @@ for idx, (_, row) in enumerate(latest_data.iterrows()):
         st.write(f"날씨: {row['weather_description']}")
         st.write(f"풍속: {row['wind_speed']}m/s")
 
-# 시계열 그래프
+# Time-series graph
 st.subheader("지역별 기온 변화")
 historical_data = get_historical_data()
 fig = px.line(
@@ -61,19 +60,19 @@ fig = px.line(
     x='timestamp',
     y='temperature',
     color='city',
-    title='도시별 기온 변화'
+    title='Temperature Change Per City'
 )
 st.plotly_chart(fig, use_container_width=True)
 
-# 습도 분포 그래프
-st.subheader("현재 습도 분포")
+# Humidity Distribution Graph
+st.subheader("Current Humidity Distribution")
 fig_humidity = px.bar(
     latest_data,
     x='city',
     y='humidity',
-    title='도시별 습도'
+    title='Humidity Per City'
 )
 st.plotly_chart(fig_humidity, use_container_width=True)
 
 # 데이터 업데이트 시간 표시
-st.sidebar.write("최종 업데이트:", latest_data['timestamp'].iloc[0])
+st.sidebar.write("Last Updated:", latest_data['timestamp'].iloc[0])

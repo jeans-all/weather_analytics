@@ -26,7 +26,7 @@ def get_weather_data(city):
     params = {
         'q': city,
         'appid': API_KEY,
-        'units': 'metric'  # 섭씨온도 사용
+        'units': 'metric'  # Use Celcius 
     }
     
     response = requests.get(BASE_URL, params=params)
@@ -34,7 +34,7 @@ def get_weather_data(city):
     if response.status_code == 200:
         data = response.json()
         
-        # 필요한 데이터만 추출
+        # extract data of interest
         weather_info = {
             'city': city.split(',')[0],
             'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
@@ -48,14 +48,14 @@ def get_weather_data(city):
         print(f"Error fetching data for {city}: {response.status_code}")
         return None
 
-# 모든 도시의 데이터 수집
+# For all cities
 def collect_all_cities():
     all_data = []
     for city in CITIES:
         weather_data = get_weather_data(city)
         if weather_data:
             all_data.append(weather_data)
-        time.sleep(1)  # API 호출 제한 고려
+        time.sleep(1)  # Consider API restriction in frequency
     return all_data
 
 weather_data = collect_all_cities()
