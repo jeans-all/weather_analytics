@@ -45,10 +45,6 @@ def get_weather_data(city):
             'wind_speed': data['wind']['speed']
         }
         
-        # data['timestamp'] = weather_info['timestamp']
-        # data['city'] = weather_info['city']
-        # print(weather_info)
-        # return (weather_info, data)
         return weather_info
     else:
         print(f"Error fetching data for {city}: {response.status_code}")
@@ -57,69 +53,33 @@ def get_weather_data(city):
 # 모든 도시의 데이터 수집
 def collect_all_cities():
     all_data = []
-    all_fullData = []
     for city in CITIES:
-        # (weather_data, fullData) = get_weather_data(city)
         weather_data = get_weather_data(city)
-        # print(weather_data)
         if weather_data:
             all_data.append(weather_data)
-            # all_fullData.append(fullData)
         time.sleep(1)  # API 호출 제한 고려
-    # print(all_data)
-    # print()
-    # print(all_fullData)
-    # return (all_data, all_fullData)
     return all_data
 
-# (weather_data, weather_fullData) = collect_all_cities()
 weather_data = collect_all_cities()
 # print(json.dumps(weather_data, indent=2))
-
-
-
 
 def process_weather_data(weather_data):
     # JSON 데이터를 DataFrame으로 변환
 
-    print(weather_data)
-    print()
     df = pd.DataFrame(weather_data)
-    
 
     # timestamp 컬럼을 datetime 타입으로 변환
-    try:
-        df['timestamp'] = pd.to_datetime(df['timestamp'])
-    
-    except:
-        print(df)
-        print(df.columns)
-        exit()
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
 
     # 도시명을 인덱스로 설정
     df.set_index('city', inplace=True)
     
-    # 컬럼명 한글로 변경 (선택사항)
-    # print(df.columns)
-    # df.columns = ['측정시각', '기온', '체감기온', '습도', '날씨', '풍속']
-    # 소수점 자릿수 조정
-    # df['기온'] = df['기온'].round(1)
-    # df['풍속'] = df['풍속'].round(1)
+    # df['temperature'] = df['temperature'].round(1)
+    # df['wind_speed'] = df['wind_speed'].round(1)
     
     return df
-
-def process_weather_dataFull(weather_fullData):
-    df = pd.DataFrame(weather_fullData)
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
-    df.set_index('city', inplace = True)
-    
-    return df
-
 
 df_weather = process_weather_data(weather_data)
-# df_weather_fullData = process_weather_dataFull(weather_fullData)
-# print(df_weather_fullData['main'])
-
 
 def create_database():
     conn = sqlite3.connect('data/weather_data.db')
@@ -138,10 +98,7 @@ def create_database():
         )
     '''
 
-    
-
     cursor.execute(query)
-
     conn.commit()
     return conn
 
@@ -164,7 +121,6 @@ def save_to_database(df):
 
 # 데이터베이스 저장 실행
 save_to_database(df_weather)
-# save_to_databaseFull(df_weather_fullData)
 # 저장된 데이터 확인
 def check_saved_data():
     conn = sqlite3.connect('data/weather_data.db')

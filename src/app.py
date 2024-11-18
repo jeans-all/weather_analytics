@@ -117,7 +117,7 @@ st.plotly_chart(fig, use_container_width=True)
 # 습도와 풍속과의 관계
 st.subheader("Relation Between Humidity and Temperature", anchor="Section-4")
 fig_scatter = px.scatter(historical_data.sort_values('humidity'), x="humidity", y="wind_speed", color="temperature", 
-                         size="temperature", hover_data=["city"], labels={"humidity": "습도 (%)", "wind_speed": "풍속 (m/s)"})
+                         size="temperature", hover_data=["city"], labels={"humidity": "Humidity (%)", "wind_speed": "Wind Speed (m/s)"})
 st.plotly_chart(fig_scatter, use_container_width=True)
 
 
