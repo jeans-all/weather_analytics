@@ -9,7 +9,7 @@ def job():
     print(f"Data collected at {time.strftime('%Y-%m-%d %H:%M:%S')}")
 
 # 15분마다 데이터 수집
-schedule.every(15).minutes.do(job)
+schedule.every(1).minutes.do(job)
 
 if __name__ == "__main__":
     print("Weather data collection started...")
