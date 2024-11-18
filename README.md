@@ -63,3 +63,11 @@ https://openweathermap.org 에서 API Key 값을 발급 받은 후 .env 에 저�
 - SQLite
 - Streamlit
 - Plotly
+
+## 사용 화면
+
+<img src="./img/weather_status.png" width="80%" height="80%">
+<img src="./img/real_vs_feeling.png" width="80%" height="80%">
+<img src="./img/time_serial_graph.png" width="80%" height="80%">
+<img src="./img/humidity_over_wind_speed.png" width="80%" height="80%">
+<img src="./img/humidity_distribution.png" width="80%" height="80%">
