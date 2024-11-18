@@ -63,3 +63,11 @@ Register in https://openweathermap.org and then write the issued API key into fi
 - SQLite
 - Streamlit
 - Plotly
+
+## Play Screen
+
+<img src="./img/weather_status.png" width="80%" height="80%">
+<img src="./img/real_vs_feeling.png" width="80%" height="80%">
+<img src="./img/time_serial_graph.png" width="80%" height="80%">
+<img src="./img/humidity_over_wind_speed.png" width="80%" height="80%">
+<img src="./img/humidity_distribution.png" width="80%" height="80%">
